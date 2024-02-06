@@ -33,3 +33,12 @@ mender-artifact write module-image \
     --software-name "Mender Template" \
     --software-version "${VERSION}"
 ```
+
+#### GitHub Actions
+
+This repository contains a workflow for GitHub actions which builds both images (with and without the firmware update for Raspberry Pi 4) and a Mender artifact.
+
+#### Simple SBOM
+
+As part of the image building process, a simple *software bill of materials* (SBOM) is generated.
+The SBOM is stored in `build/customized.sbom.txt` and also included in the build artifacts of the GitHub Actions workflow.
