@@ -1,0 +1,2 @@
+description = "setup Mender"
+dependencies = ["rugpi-extra/mender"]

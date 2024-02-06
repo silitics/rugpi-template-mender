@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# You can adapt this script to generate custom inventory information.
+# 
+# For instance:
+echo "Custom Inventory Key=Custom Inventory Value"

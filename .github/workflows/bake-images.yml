@@ -1,0 +1,48 @@
+name: Bake Image
+
+on:
+  workflow_dispatch:
+  push:
+
+env:
+  NAME: "Mender Template"
+
+jobs:  
+  bake-image:
+    name: Bake Images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install QEMU
+        run: docker run --privileged --rm tonistiigi/binfmt --install arm64
+      
+      - name: Prepare
+        run: mkdir build
+      
+      - name: Bake Image (Pi4)
+        run: ./run-bakery bake image pi4 build/pi4.img
+      
+      - name: Bake Image (Tryboot)
+        run: ./run-bakery bake image tryboot build/tryboot.img
+
+      - name: Build Mender Artifact
+        run: |
+          wget https://downloads.mender.io/mender-artifact/3.11.0/linux/mender-artifact
+          VERSION=$(date +'%Y%m%d.%H%M')
+          ./mender-artifact write module-image \
+              -n "${NAME} ${VERSION}" \
+              -t raspberrypi4 \
+              -T rugpi-image \
+              -f build/tryboot.img \
+              -o build/${VERSION}.mender \
+              --software-name "${NAME}" \
+              --software-version "${VERSION}"
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: images
+          path: build/*

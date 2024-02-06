@@ -9,16 +9,3 @@ include_firmware = "none"
 [images.pi4]
 layer = "customized"
 include_firmware = "pi4"
-
-# An image using the U-Boot boot flow for Raspberry Pi 3 and Zero 2.
-[images.u-boot]
-layer = "customized"
-boot_flow = "u-boot"
-include_firmware = "none"
-
-# An `armhf` image for older Raspberry Pi's using the U-Boot boot flow.
-[images.u-boot-armhf]
-layer = "customized"
-architecture = "armhf"
-boot_flow = "u-boot"
-include_firmware = "none"
