@@ -36,7 +36,7 @@ mender-artifact write module-image \
 
 #### GitHub Actions
 
-This repository contains a workflow for GitHub actions which builds both images (with and without the firmware update for Raspberry Pi 4) and a Mender artifact.
+This repository contains a workflow for GitHub Actions which builds both images (with and without the firmware update for Raspberry Pi 4) and a Mender artifact which is ready to be uploaded to Mender.
 
 #### Simple SBOM
 
