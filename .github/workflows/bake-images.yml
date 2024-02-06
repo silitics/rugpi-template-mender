@@ -19,8 +19,14 @@ jobs:
       - name: Install QEMU
         run: docker run --privileged --rm tonistiigi/binfmt --install arm64
       
-      - name: Prepare
-        run: mkdir build
+      - name: Prepare and Configure
+        env:
+          SECRET_ENV: ${{secrets.ENV || ''}}
+        run: |
+          mkdir build
+          if [ -n "${SECRET_ENV}" ]; then
+            echo "${SECRET_ENV}" > .env
+          fi
       
       - name: Bake Image (Pi4)
         run: ./run-bakery bake image pi4 build/pi4.img
@@ -42,8 +48,8 @@ jobs:
               --software-name "${NAME}" \
               --software-version "${VERSION}"
 
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: artifacts
-          path: build/*
+      # - name: Upload Build Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: artifacts
+      #     path: build/*
