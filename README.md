@@ -12,7 +12,7 @@ For this reason, we use a `.env` file for secrets.
 To configure the token, copy the `env.template` file to `.env` and replace the placeholder with your actual token.
 In addition, you may need to change the server URL in the [`mender.conf`](recipes/mender/files/mender.conf) configuration file and put your public SSH key in [`layers/customized.toml`](layers/customized.toml).
 
-### 🏗️ Building Images
+## 🏗️ Building Images
 
 To build an image for Raspberry Pi 4, including the necessary firmware update:
 
@@ -50,7 +50,7 @@ Note that the build artifacts contain the token and are thus not uploaded by def
 If you want to extract the artifacts, uncomment the respective section in the workflow.
 **Make sure your repository is private in order to not leak the token.**
 
-#### Simple SBOM
+### Simple SBOM
 
 As part of the image building process, a simple *software bill of materials* (SBOM) is generated.
 The SBOM is stored in `build/customized.sbom.txt` and also included in the build artifacts of the GitHub Actions workflow.
