@@ -44,7 +44,7 @@ mender-artifact write module-image \
 
 ### GitHub Actions
 
-This repository contains a workflow for GitHub Actions which builds both images (with and without the firmware update for Raspberry Pi 4) and a Mender artifact which is ready to be uploaded to Mender.
+This repository contains a workflow for GitHub Actions which builds both images (with and without the firmware update for Raspberry Pi 4) and a Mender artifact.
 To inject the Mender tenant token, you need to create a GitHub Actions secret named `ENV` and put the contents of the `.env` file there.
 Note that the build artifacts contain the token and are thus not uploaded by default.
 If you want to extract the artifacts, uncomment the respective section in the workflow.
