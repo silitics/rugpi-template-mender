@@ -1,4 +1,4 @@
-name: Bake Image
+name: Bake Images
 
 on:
   workflow_dispatch:
@@ -31,6 +31,7 @@ jobs:
       - name: Build Mender Artifact
         run: |
           wget https://downloads.mender.io/mender-artifact/3.11.0/linux/mender-artifact
+          chmod +x ./mender-artifact
           VERSION=$(date +'%Y%m%d.%H%M')
           ./mender-artifact write module-image \
               -n "${NAME} ${VERSION}" \

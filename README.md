@@ -2,10 +2,22 @@
 
 This template shows how to build a Rugpi image with Mender integration.
 
-For general information about Rugpi, check out the [Rugpi quick start guide](https://oss.silitics.com/rugpi/docs/getting-started).
+For general information about Rugpi and how to use it, check out the [Rugpi's documentation](https://oss.silitics.com/rugpi/docs/getting-started).
 
 To configure Mender, you need to adapt the configuration files found in the [`mender`](recipes/mender) recipe.
-For a minimal working configuration, you should put your Mender tenant token in the [`mender.conf`](recipes/mender/files/mender.conf) file and your public SSH key in `layers/customized.toml`.
+For a minimal working configuration, you should put your Mender tenant token in the [`mender.conf`](recipes/mender/files/mender.conf) configuration file and your public SSH key in [`layers/customized.toml`](layers/customized.toml).
+
+To build an image for Raspberry Pi 4, including the necessary firmware update:
+
+```bash
+./run-bakery bake image pi4 build/pi4.img
+```
+
+To build an image for Raspberry Pi 5 or 4, without the firmware update:
+
+```bash
+./run-bakery bake image tryboot build/tryboot.img
+```
 
 To create a Mender artifact from the produced images:
 
