@@ -1,6 +1,6 @@
 # Rugpi: Quick Start Template for Mender
 
-This template showcases how to build a Rugpi image with [Mender](https://mender.io) integration.
+This template showcases how to build a [Rugpi](https://rugpi.io) image with [Mender](https://mender.io) integration.
 
 For general information about Rugpi and how to use it, check out [Rugpi's documentation](https://oss.silitics.com/rugpi/docs/getting-started).
 
@@ -12,8 +12,8 @@ This template allows you to build images for:
 For Raspberry Pi, images can be built based on Raspberry Pi OS or Debian.
 Note that Rugpi also supports older models of Raspberry Pi, however, we do not showcase images for them here.
 
-The images are ready-to-use and devices running them connect to the Mender's device management platform automatically.
-To this end, you must configure your tenant/organization token (details bellow).
+The images are ready-to-use and devices running them should connect to Mender's device management platform automatically.
+To this end, you must configure the tenant/organization token (details bellow).
 Note that while fully compatible with Mender's cloud offering and update client, **the actual update is handled by Rugpi**.
 In this setup, Mender only serves as a frontend for Rugpi's OTA update mechanism.
 
@@ -70,7 +70,7 @@ To build an image that is directly usable with a VM (e.g., QEMU):
 
 ### GitHub Actions
 
-This repository contains a workflow for GitHub Actions which builds both images (with and without the firmware update for Raspberry Pi 4) and a Mender artifact.
+This repository contains a workflow for GitHub Actions which builds all images (except the VM images) and a Mender artifact for each image.
 To inject the Mender tenant token, you need to create a GitHub Actions secret named `ENV` and put the contents of the `.env` file there.
 Note that the build artifacts contain the token and are thus not uploaded by default.
 If you want to extract the artifacts, uncomment the respective section in the workflow.
@@ -79,4 +79,4 @@ If you want to extract the artifacts, uncomment the respective section in the wo
 ### Simple SBOM
 
 As part of the image building process, a simple *software bill of materials* (SBOM) is generated.
-The SBOM is stored in `build/customized.sbom.txt` and also included in the build artifacts of the GitHub Actions workflow.
+The SBOM is stored in `build/*.sbom.txt` and is also included in the build artifacts of the GitHub Actions workflow.
