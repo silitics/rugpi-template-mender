@@ -33,8 +33,20 @@ layer = "efi-debian"
 architecture = "amd64"
 target = "generic-grub-efi"
 
+[images.efi-debian-amd64-vm]
+layer = "efi-debian"
+architecture = "amd64"
+target = "generic-grub-efi"
+size = "16G"
+
 # Image based on Debian for EFI ARM64 systems.
 [images.efi-debian-arm64]
 layer = "efi-debian"
 architecture = "arm64"
 target = "generic-grub-efi"
+
+[images.efi-debian-arm64-vm]
+layer = "efi-debian"
+architecture = "arm64"
+target = "generic-grub-efi"
+size = "16G"
