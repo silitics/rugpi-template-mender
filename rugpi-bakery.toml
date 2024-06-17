@@ -13,7 +13,7 @@ target = "rpi-tryboot"
 
 # Like the `rpi-raspios-tryboot` image but with the firmware update for Raspberry Pi 4.
 [images.rpi-raspios-pi4]
-layer = "rpi-raspios"
+layer = "rpi-raspios-pi4"
 architecture = "arm64"
 target = "rpi-tryboot"
 
@@ -23,18 +23,18 @@ target = "rpi-tryboot"
 #
 # Note that Raspberry Pi 4 devices need to have the latest firmware installed.
 [images.rpi-debian]
-layer = "rpi-raspios"
+layer = "rpi-debian"
 architecture = "arm64"
 target = "rpi-tryboot"
 
 # Image based on Debian for EFI AMD64 systems.
 [images.efi-debian-amd64]
-layer = "rpi-raspios"
+layer = "efi-debian"
 architecture = "amd64"
 target = "generic-grub-efi"
 
 # Image based on Debian for EFI ARM64 systems.
 [images.efi-debian-arm64]
-layer = "rpi-raspios"
+layer = "efi-debian"
 architecture = "arm64"
 target = "generic-grub-efi"
