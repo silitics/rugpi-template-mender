@@ -11,7 +11,7 @@ layer = "rpi-raspios"
 architecture = "arm64"
 target = "rpi-tryboot"
 
-# Like the `rpi-raspios-tryboot` image but with the firmware update for Raspberry Pi 4.
+# Like the `rpi-raspios` image but with the firmware update for Raspberry Pi 4.
 [images.rpi-raspios-pi4]
 layer = "rpi-raspios-pi4"
 architecture = "arm64"
@@ -24,6 +24,12 @@ target = "rpi-tryboot"
 # Note that Raspberry Pi 4 devices need to have the latest firmware installed.
 [images.rpi-debian]
 layer = "rpi-debian"
+architecture = "arm64"
+target = "rpi-tryboot"
+
+# Like the `rpi-debian` image but with the firmware update for Raspberry Pi 4.
+[images.rpi-debian-pi4]
+layer = "rpi-debian-pi4"
 architecture = "arm64"
 target = "rpi-tryboot"
 

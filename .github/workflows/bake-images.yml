@@ -18,6 +18,7 @@ jobs:
           - { image: rpi-raspios }
           - { image: rpi-raspios-pi4 }
           - { image: rpi-debian }
+          - { image: rpi-debian-pi4 }
           - { image: efi-debian-amd64 }
           - { image: efi-debian-arm64 }
     steps:
