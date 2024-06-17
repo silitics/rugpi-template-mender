@@ -11,6 +11,15 @@ jobs:
   bake-image:
     name: Bake Images
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - { image: rpi-raspios }
+          - { image: rpi-raspios-pi4 }
+          - { image: rpi-debian }
+          - { image: efi-debian-amd64 }
+          - { image: efi-debian-arm64 }
     steps:
       - uses: actions/checkout@v4
         with:
@@ -21,18 +30,15 @@ jobs:
       
       - name: Prepare and Configure
         env:
-          SECRET_ENV: ${{secrets.ENV || ''}}
+          SECRET_ENV: ${{ secrets.ENV || '' }}
         run: |
           mkdir build
           if [ -n "${SECRET_ENV}" ]; then
             echo "${SECRET_ENV}" > .env
           fi
       
-      - name: Bake Image (Pi4)
-        run: ./run-bakery bake image pi4 build/pi4.img
-      
-      - name: Bake Image (Tryboot)
-        run: ./run-bakery bake image tryboot build/tryboot.img
+      - name: Bake Image
+        run: ./run-bakery bake image ${{ matrix.job.image }}
 
       - name: Build Mender Artifact
         run: |
@@ -43,7 +49,7 @@ jobs:
               -n "${NAME} ${VERSION}" \
               -t raspberrypi4 \
               -T rugpi-image \
-              -f build/tryboot.img \
+              -f build/images/${{ matrix.job.image }}.img \
               -o build/${VERSION}.mender \
               --software-name "${NAME}" \
               --software-version "${VERSION}"

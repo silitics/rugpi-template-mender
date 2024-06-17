@@ -17,13 +17,13 @@ In addition, you may need to change the server URL in the [`mender.conf`](recipe
 To build an image for Raspberry Pi 4, including the necessary firmware update:
 
 ```bash
-./run-bakery bake image pi4 build/pi4.img
+./run-bakery bake image raspios-pi4
 ```
 
 To build an image for Raspberry Pi 5 or 4, without the firmware update:
 
 ```bash
-./run-bakery bake image tryboot build/tryboot.img
+./run-bakery bake image raspios-tryboot
 ```
 
 To create a Mender artifact from the produced `tryboot` image:
@@ -34,9 +34,9 @@ mender-artifact write module-image \
     -n "Image ${VERSION}" \
     -t raspberrypi4 \
     -T rugpi-image \
-    -f build/tryboot.img \
+    -f build/images/raspios-tryboot.img \
     -o build/${VERSION}.mender \
-    --software-name "Mender Template" \
+    --software-name "Rugpi Image" \
     --software-version "${VERSION}"
 ```
 

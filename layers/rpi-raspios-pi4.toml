@@ -1,0 +1,9 @@
+parent = "rpi-raspios"
+
+recipes = [
+    # Include the firmware for Raspberry Pi 4.
+    "core/rpi-include-firmware",
+]
+
+[parameters."core/rpi-include-firmware"]
+model = "pi4"

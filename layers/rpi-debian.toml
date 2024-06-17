@@ -1,0 +1,40 @@
+# Use Debian Bookworm as a basis for the custom image.
+#
+# Note that you can also declare your own base layer(s). For examples, see:
+# https://github.com/silitics/rugpi/tree/main/repositories/core/layers
+parent = "core/debian-bookworm"
+
+# Include recipes for the custom image.
+recipes = [
+    # Prepares the Raspberry Pi base image for usage with Rugpi.
+    "core/rpi-debian-setup",
+    # Sets a static hostname (see parameters below).
+    "core/set-hostname",
+    # Persists the home directory of the root user.
+    "core/persist-root-home",
+    # Configures SSH.
+    "core/ssh",
+    # Create a simple SBOM.
+    "rugpi-extra/simple-sbom",
+    # Enable and configure the Mender client.
+    "mender",
+    # Enable the `hello-world` recipe installing the static webpage.
+    "hello-world",
+]
+
+[parameters."core/set-hostname"]
+hostname = "rugpi-template-mender"
+
+[parameters."core/pkg-cleanup"]
+autoremove = true
+
+[parameters."core/ssh"]
+root_authorized_keys = """
+PLACE YOUR OWN PUBLIC SSH KEY HERE!
+"""
+
+[parameters."core/rugpi-ctrl"]
+rugpi_admin = true  # Enable Rugpi Admin.
+
+[parameters."rugpi-extra/simple-sbom"]
+sbom_file = "build/rpi-raspios.sbom.txt"
