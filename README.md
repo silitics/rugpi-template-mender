@@ -4,7 +4,7 @@ This template showcases how to build a Rugpi image with [Mender](https://mender.
 
 For general information about Rugpi and how to use it, check out [Rugpi's documentation](https://oss.silitics.com/rugpi/docs/getting-started).
 
-You can build images for:
+This template allows you to build images for:
 
 - Raspberry Pi 4 and 5 (ARM64).
 - Any EFI-compatible system (ARM64 and AMD64).
@@ -52,6 +52,18 @@ mender-artifact write module-image \
     -o build/${VERSION}.mender \
     --software-name "Rugpi Image" \
     --software-version "${VERSION}"
+```
+
+To build an image for an AMD64 EFI-compatible system:
+
+```bash
+./run-bakery bake image efi-debian-amd64
+```
+
+To build an image that is directly usable with a VM (e.g., QEMU):
+
+```bash
+./run-bakery bake image efi-debian-amd64-vm
 ```
 
 ## ℹ️ Remarks
