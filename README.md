@@ -1,32 +1,46 @@
 # Rugpi: Quick Start Template for Mender
 
-This template shows how to build a Rugpi image with Mender integration.
+This template showcases how to build a Rugpi image with [Mender](https://mender.io) integration.
 
 For general information about Rugpi and how to use it, check out [Rugpi's documentation](https://oss.silitics.com/rugpi/docs/getting-started).
 
+You can build images for:
+
+- Raspberry Pi 4 and 5 (ARM64).
+- Any EFI-compatible system (ARM64 and AMD64).
+
+For Raspberry Pi, images can be built based on Raspberry Pi OS or Debian.
+Note that Rugpi also supports older models of Raspberry Pi, however, we do not showcase images for them here.
+
+The images are ready-to-use and devices running them connect to the Mender's device management platform automatically.
+To this end, you must configure your tenant/organization token (details bellow).
+Note that while fully compatible with Mender's cloud offering and update client, **the actual update is handled by Rugpi**.
+In this setup, Mender only serves as a frontend for Rugpi's OTA update mechanism.
+
 ## 🔧 Configuration
 
-To configure Mender, you need your Mender tenant token.
+To configure Mender, you need your Mender tenant/organization token.
 Note that this token, as any secret, should not be committed to Git.
 For this reason, we use a `.env` file for secrets.
 To configure the token, copy the `env.template` file to `.env` and replace the placeholder with your actual token.
-In addition, you may need to change the server URL in the [`mender.conf`](recipes/mender/files/mender.conf) configuration file and put your public SSH key in [`layers/customized.toml`](layers/customized.toml).
+In addition, you may need to change the server URL in the [`mender.conf`](recipes/mender/files/mender.conf) configuration file.
+If you want to be able to connect via SSH, put your public SSH key in the respective layer configuration file in [`layers`](layers).
 
 ## 🏗️ Building Images
 
 To build an image for Raspberry Pi 4, including the necessary firmware update:
 
 ```bash
-./run-bakery bake image raspios-pi4
+./run-bakery bake image rpi-raspios-pi4
 ```
 
 To build an image for Raspberry Pi 5 or 4, without the firmware update:
 
 ```bash
-./run-bakery bake image raspios-tryboot
+./run-bakery bake image rpi-raspios
 ```
 
-To create a Mender artifact from the produced `tryboot` image:
+To create a Mender artifact from the produced `rpi-raspios` image:
 
 ```bash
 VERSION=$(date +'%Y%m%d.%H%M')
@@ -34,7 +48,7 @@ mender-artifact write module-image \
     -n "Image ${VERSION}" \
     -t raspberrypi4 \
     -T rugpi-image \
-    -f build/images/raspios-tryboot.img \
+    -f build/images/rpi-raspios.img \
     -o build/${VERSION}.mender \
     --software-name "Rugpi Image" \
     --software-version "${VERSION}"

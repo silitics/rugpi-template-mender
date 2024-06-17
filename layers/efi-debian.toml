@@ -37,4 +37,4 @@ PLACE YOUR OWN PUBLIC SSH KEY HERE!
 rugpi_admin = true  # Enable Rugpi Admin.
 
 [parameters."rugpi-extra/simple-sbom"]
-sbom_file = "build/generic-debian.sbom.txt"
+sbom_file = "build/efi-debian.sbom.txt"
